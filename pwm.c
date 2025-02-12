@@ -8,7 +8,8 @@ const float PWM_DIVISER = 100; //divisor do clock para o PWM
 volatile bool rotina = false;
 uint slice = 0;
 
-
+// frequencia pwm = 125000000/(100*25000) = 50 Hz 
+// Tpwm = 1/50 = 0.02 = 20 ms
 
 //Função para configurar o módulo PWM
 void pwm_setup()
@@ -33,14 +34,14 @@ void wrapHandler(){
     pwm_clear_irq(pwm_gpio_to_slice_num(PIN)); //resetar o flag de interrupção
 
     if(rise){ //caso a potência seja crescendo
-        wrap += 52.5; //aumenta o nível de potência
+        wrap += 35; //aumenta o nível de potência (28 us)
         if(wrap > 3000){ //caso o wrap seja menor que 3000
             wrap = 3000; //iguala wrap a 3000
             rise = false; //muda o flag rise para redução 
         }
     }
     else{ //caso a potência esteja caindo
-        wrap -= 52.5; //diminui o nivel de potência
+        wrap -= 35; //diminui o nivel de potência (28 us)
         if(wrap < 625){ //caso o fade seja menor que 625
             wrap = 625; //iguala wrap a 625
             rise = true; //muda o flag rise para elevação no nível de iluminação
@@ -68,7 +69,7 @@ void pwm_setup_irq(){
 //Função que deixa em 180 graus
 void graus_180(){
     if(rotina == false){ 
-        pwm_set_gpio_level(PIN, 3000); // duty cycle (12%) => 25000 * 0,12 = 3000
+        pwm_set_gpio_level(PIN, 3000); // duty cycle (12%) => 25000 * 0,12 = 3000(2.4ms)
         sleep_ms(5000);
     }
 }
@@ -77,7 +78,7 @@ void graus_180(){
 void graus_90(){
     if(rotina == false){ 
         printf("Entrou 2\n");
-        pwm_set_gpio_level(PIN, 1837.5); // duty cycle (7,35%) => 25000 * 0,0735 = 1837.5
+        pwm_set_gpio_level(PIN, 1837.5); // duty cycle (7,35%) => 25000 * 0,0735 = 1837.5(1.47ms)
         sleep_ms(5000);
     }
 }
@@ -85,8 +86,7 @@ void graus_90(){
 //Função que deixa em 0 graus
 void graus_0(){
     if(rotina == false){ 
-        printf("Entrou 3\n");
-        pwm_set_gpio_level(PIN, 625); // duty cycle (0,0735%) => 25000 * 0,000735 = 18,375
+        pwm_set_gpio_level(PIN, 625); // duty cycle (2.5%) => 25000 * 0.025 = 625 (0.5 ms)
         sleep_ms(5000);
         rotina = true;
     }
