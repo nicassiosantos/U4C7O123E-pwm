@@ -15,7 +15,7 @@ Este projeto utiliza o **Raspberry Pi Pico** para controlar um **servo motor** a
 
 ## video do Projeto
 - **[Ver Video](https://drive.google.com/file/d/1L20wqLJ6ExRvqR8A_QHNRRN3DfRTPWUk/view?usp=sharing)**
-- 
+  
 ## Frequência e Cálculo do PWM
 
 ### Parâmetros Utilizados:
