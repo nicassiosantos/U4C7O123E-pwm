@@ -27,7 +27,7 @@ void pwm_setup()
     pwm_set_enabled(slice, true); //habilita o pwm no slice correspondente
 }
 
-//Função para o tratamento da interrrupção
+//Função para o tratamento da interrrupção variando a angulação do servo motor
 void wrapHandler(){ 
     static float wrap = 625; 
     static bool rise = true; //flag para elevar ou reduzir a potência entregada
