@@ -20,7 +20,6 @@ Este projeto utiliza o **Raspberry Pi Pico** para controlar um **servo motor** a
 
 ### Parâmetros Utilizados:
 - **Frequência do PWM**: 50 Hz  
-  - Justificativa: Servos convencionais utilizam um período de **20 ms** para controle de posição.
 - **Divisor de Clock (PWM_DIVISER)**: 100
 - **Período de Wrap (WRAP_PERIOD)**: 25000
 
